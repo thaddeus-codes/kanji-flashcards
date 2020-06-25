@@ -1,20 +1,21 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-export default function KanjiCard(props) {
-  return (
-    <View style={styles.container}>
-      <Text>{props.kanji.kanji.character}</Text>
-    </View>
-  );
+{
+  /* <CardStack
+          style={styles.content}
+          ref={swiper => {
+            this.swiper = swiper;
+          }}
+        >
+          {this.state.loading ? (
+            <Text>Loading...</Text>
+          ) : (
+            this.state.kanjiData.map(kanji => {
+              key++;
+              return (
+                <Card style={[styles.card, styles.card1]} key={key}>
+                  <Text style={styles.label}>{kanji.kanji.character}</Text>
+                </Card>
+              );
+            })
+          )}
+        </CardStack> */
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#99ffff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: 500,
-  },
-});

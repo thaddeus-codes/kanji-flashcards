@@ -38,29 +38,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    let key = 0;
     return (
       <View style={styles.container}>
         <KanjiLevels />
-        {/* <CardStack
-          style={styles.content}
-          ref={swiper => {
-            this.swiper = swiper;
-          }}
-        >
-          {this.state.loading ? (
-            <Text>Loading...</Text>
-          ) : (
-            this.state.kanjiData.map(kanji => {
-              key++;
-              return (
-                <Card style={[styles.card, styles.card1]} key={key}>
-                  <Text style={styles.label}>{kanji.kanji.character}</Text>
-                </Card>
-              );
-            })
-          )}
-        </CardStack> */}
       </View>
     );
   }
