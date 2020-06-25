@@ -40,7 +40,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <KanjiLevels />
+        <KanjiLevels style={styles.content} />
       </View>
     );
   }
@@ -49,7 +49,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffff99',
+    backgroundColor: '#ebfcfc',
     alignItems: 'center',
     justifyContent: 'center',
   },

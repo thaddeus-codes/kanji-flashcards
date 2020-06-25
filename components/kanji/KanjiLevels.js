@@ -46,12 +46,18 @@ export default class App extends React.Component {
 
   _renderItem({ item, index }) {
     return (
-      <View
-        style={[styles.card, { backgroundColor: `${item.backgroundColor}` }]}
+      <TouchableWithoutFeedback
+        onPress={() => {
+          alert('you press kanji level ' + item.title);
+        }}
       >
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.description}>{item.text}</Text>
-      </View>
+        <View
+          style={[styles.card, { backgroundColor: `${item.backgroundColor}` }]}
+        >
+          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.description}>{item.text}</Text>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 
