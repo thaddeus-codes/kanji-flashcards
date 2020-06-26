@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import KanjiLevels from './components/kanji/KanjiLevels';
 import KanjiCard from './components/kanji/KanjiCard';
+import Flashcard from './components/cards/Flashcard';
 
 const Stack = createStackNavigator();
 
@@ -20,11 +21,12 @@ export default class App extends React.Component {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen
+          {/* <Stack.Screen
             name="Home"
             component={KanjiLevels}
             style={styles.content}
-          />
+          /> */}
+          <Stack.Screen name="Home" component={Flashcard} />
           <Stack.Screen name="Kanji Review" component={KanjiCard} />
         </Stack.Navigator>
       </NavigationContainer>
