@@ -1,9 +1,11 @@
 import React from 'react';
-import axios from 'axios';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import KanjiCard from './components/kanji/KanjiCard';
-import CardStack, { Card } from 'react-native-card-stack-swiper';
+import { StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import KanjiLevels from './components/kanji/KanjiLevels';
+import KanjiCard from './components/kanji/KanjiCard';
+
+const Stack = createStackNavigator();
 
 export default class App extends React.Component {
   constructor() {
@@ -12,56 +14,20 @@ export default class App extends React.Component {
       kanjiData: [],
       loading: true,
     };
-    this.getData = this.getData.bind(this);
-  }
-
-  componentDidMount() {
-    this.getData();
-  }
-
-  async getData() {
-    const { data } = await axios({
-      method: 'GET',
-      url: 'https://kanjialive-api.p.rapidapi.com/api/public/search/advanced/',
-      headers: {
-        'content-type': 'application/octet-stream',
-        'x-rapidapi-host': 'kanjialive-api.p.rapidapi.com',
-        'x-rapidapi-key': '70834d5555msh146ccbf79ca3d06p140bf1jsn95e15eef3ce1',
-        useQueryString: true,
-      },
-      params: {
-        grade: '1',
-      },
-    });
-
-    this.setState({ kanjiData: data, loading: false });
   }
 
   render() {
-    let key = 0;
     return (
-      <View style={styles.container}>
-        <KanjiLevels />
-        {/* <CardStack
-          style={styles.content}
-          ref={swiper => {
-            this.swiper = swiper;
-          }}
-        >
-          {this.state.loading ? (
-            <Text>Loading...</Text>
-          ) : (
-            this.state.kanjiData.map(kanji => {
-              key++;
-              return (
-                <Card style={[styles.card, styles.card1]} key={key}>
-                  <Text style={styles.label}>{kanji.kanji.character}</Text>
-                </Card>
-              );
-            })
-          )}
-        </CardStack> */}
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name="Home"
+            component={KanjiLevels}
+            style={styles.content}
+          />
+          <Stack.Screen name="Kanji Review" component={KanjiCard} />
+        </Stack.Navigator>
+      </NavigationContainer>
     );
   }
 }
@@ -69,24 +35,12 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffff99',
+    backgroundColor: '#ebfcfc',
     alignItems: 'center',
     justifyContent: 'center',
   },
   content: {
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  card: {
-    color: '#ffffff',
-    height: 600,
-    width: 300,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-  },
-
-  card1: {
-    backgroundColor: '#9fedb2',
   },
 });
