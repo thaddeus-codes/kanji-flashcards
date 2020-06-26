@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import Carousel from 'react-native-snap-carousel';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -19,36 +20,45 @@ export default class App extends React.Component {
           title: '一',
           text: 'Grade 1 Difficulty Kanji',
           backgroundColor: '#9fedb2',
+          grade: '1',
         },
         {
           title: '二',
           text: 'Grade 2 Difficulty Kanji',
           backgroundColor: '#9fd7ed',
+          grade: '2',
         },
         {
           title: '三',
           text: 'Grade 3 Difficulty Kanji',
           backgroundColor: '#ba9fed',
+          grade: '3',
         },
         {
           title: '四',
           text: 'Grade 4 Difficulty Kanji',
           backgroundColor: '#ed9fd7',
+          grade: '4',
         },
         {
           title: '五',
           text: 'Grade 5 Difficulty Kanji',
           backgroundColor: '#e67373',
+          grade: '5',
         },
       ],
     };
+    this._renderItem = this._renderItem.bind(this);
   }
 
   _renderItem({ item, index }) {
     return (
       <TouchableWithoutFeedback
         onPress={() => {
-          alert('you press kanji level ' + item.title);
+          this.props.navigation.navigate('Kanji Review', {
+            grade: item.grade,
+            backgroundColor: item.backgroundColor,
+          });
         }}
       >
         <View
