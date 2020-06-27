@@ -12,7 +12,7 @@ export default class Flashcard extends Component {
     super();
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.animatedValue = new Animated.Value(0);
     this.value = 0;
     this.animatedValue.addListener(({ value }) => {
@@ -50,22 +50,28 @@ export default class Flashcard extends Component {
     const frontAnimatedStyle = {
       transform: [{ rotateY: this.frontInterpolate }],
     };
-
     const backAnimatedStyle = {
       transform: [{ rotateY: this.backInterpolate }],
     };
+
+    const {
+      character,
+      meaning,
+      strokes,
+      onyomi,
+      kunyomi,
+    } = this.props.kanji.kanji;
+
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={() => this.flipCard()}>
           <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
-            <Text style={styles.label}>
-              This text is flipping on the front.
-            </Text>
+            <Text style={styles.label}>{character}</Text>
           </Animated.View>
           <Animated.View
             style={[styles.flipCard, styles.flipCardBack, backAnimatedStyle]}
           >
-            <Text style={styles.label}>This text is flipping on the back</Text>
+            <Text style={styles.info}> Strokes: {strokes.count}</Text>
           </Animated.View>
         </TouchableOpacity>
       </View>
@@ -80,8 +86,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   flipCard: {
-    width: 500,
-    height: 700,
+    width: 300,
+    height: 500,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#baf1cd',
@@ -106,5 +112,8 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: 'bold',
     backfaceVisibility: 'hidden',
+  },
+  info: {
+    color: 'white',
   },
 });
