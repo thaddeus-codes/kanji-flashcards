@@ -3,8 +3,6 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import KanjiLevels from './components/kanji/KanjiLevels';
-import KanjiCard from './components/kanji/KanjiCard';
-import Flashcard from './components/cards/Flashcard';
 import CarouselStack from './components/cards/CarouselStack';
 
 const Stack = createStackNavigator();

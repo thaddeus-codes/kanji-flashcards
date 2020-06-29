@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 
 import Carousel from 'react-native-snap-carousel';
-import { NavigationContainer } from '@react-navigation/native';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -83,7 +82,7 @@ export default class App extends React.Component {
             layout={'default'}
             ref={ref => (this.carousel = ref)}
             data={this.state.carouselItems}
-            sliderWidth={400}
+            sliderWidth={0}
             itemWidth={300}
             renderItem={this._renderItem}
             onSnapToItem={index => this.setState({ activeIndex: index })}

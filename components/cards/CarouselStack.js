@@ -1,9 +1,8 @@
 import React from 'react';
-import { Text, View, SafeAreaView, StyleSheet, Image } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import Flashcard from './Flashcard';
 import axios from 'axios';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 export default class Deck extends React.Component {
   constructor(props) {
