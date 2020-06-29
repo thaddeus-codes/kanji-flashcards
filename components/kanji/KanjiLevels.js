@@ -83,7 +83,7 @@ export default class App extends React.Component {
             layout={'default'}
             ref={ref => (this.carousel = ref)}
             data={this.state.carouselItems}
-            sliderWidth={300}
+            sliderWidth={400}
             itemWidth={300}
             renderItem={this._renderItem}
             onSnapToItem={index => this.setState({ activeIndex: index })}

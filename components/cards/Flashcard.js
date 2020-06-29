@@ -65,13 +65,30 @@ export default class Flashcard extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={() => this.flipCard()}>
-          <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
+          <Animated.View
+            style={[
+              styles.flipCard,
+              frontAnimatedStyle,
+              { backgroundColor: this.props.backgroundColor },
+            ]}
+          >
             <Text style={styles.label}>{character}</Text>
           </Animated.View>
           <Animated.View
             style={[styles.flipCard, styles.flipCardBack, backAnimatedStyle]}
           >
+            <Text style={styles.info}>Onyomi: {onyomi.katakana}</Text>
+            <Text style={styles.info}>Kunyomi: {kunyomi.hiragana}</Text>
             <Text style={styles.info}> Strokes: {strokes.count}</Text>
+            <Text style={styles.info}>Meaning: {meaning.english}</Text>
+            <Text style={styles.info}>Examples:</Text>
+            {this.props.kanji.examples.map(example => {
+              return (
+                <Text>
+                  {example.japanese} - {example.meaning.english}
+                </Text>
+              );
+            })}
           </Animated.View>
         </TouchableOpacity>
       </View>
@@ -90,7 +107,6 @@ const styles = StyleSheet.create({
     height: 500,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#baf1cd',
     backfaceVisibility: 'hidden',
     borderRadius: 20,
   },
@@ -109,11 +125,12 @@ const styles = StyleSheet.create({
   },
   label: {
     color: '#ffffff',
-    fontSize: 50,
+    fontSize: 250,
     fontWeight: 'bold',
     backfaceVisibility: 'hidden',
   },
   info: {
     color: 'white',
+    fontSize: 20,
   },
 });

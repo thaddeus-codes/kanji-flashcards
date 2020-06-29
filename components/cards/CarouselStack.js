@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, SafeAreaView, StyleSheet } from 'react-native';
+import { Text, View, SafeAreaView, StyleSheet, Image } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import Flashcard from './Flashcard';
 import axios from 'axios';
@@ -11,6 +11,7 @@ export default class Deck extends React.Component {
     this.state = {
       activeIndex: 0,
       carouselItems: [],
+      loading: true,
     };
     this._renderItem = this._renderItem.bind(this);
     this.getData = this.getData.bind(this);
@@ -18,6 +19,7 @@ export default class Deck extends React.Component {
 
   componentDidMount() {
     this.getData();
+    this.setState({ loading: false });
   }
 
   async getData() {
@@ -41,7 +43,12 @@ export default class Deck extends React.Component {
   }
 
   _renderItem({ item, index }) {
-    return <Flashcard kanji={item} />;
+    return (
+      <Flashcard
+        kanji={item}
+        backgroundColor={this.props.route.params.backgroundColor}
+      />
+    );
   }
 
   render() {
@@ -50,14 +57,19 @@ export default class Deck extends React.Component {
         style={{ flex: 1, backgroundColor: '#ebfcfc', paddingTop: 50 }}
       >
         <View
-          style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'center',
+          }}
         >
           <Carousel
-            layout={'default'}
+            layout={'stack'}
+            layoutCardOffset={5}
             ref={ref => (this.carousel = ref)}
             data={this.state.carouselItems}
-            sliderWidth={500}
-            itemWidth={400}
+            sliderWidth={400}
+            itemWidth={300}
             renderItem={this._renderItem}
             onSnapToItem={index => this.setState({ activeIndex: index })}
           />
@@ -66,26 +78,3 @@ export default class Deck extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 50,
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  description: {
-    fontWeight: 'normal',
-    fontSize: 20,
-    color: 'white',
-    textAlign: 'center',
-  },
-  card: {
-    justifyContent: 'center',
-    height: 250,
-    borderRadius: 5,
-    padding: 5,
-    marginLeft: 25,
-    marginRight: 25,
-  },
-});
